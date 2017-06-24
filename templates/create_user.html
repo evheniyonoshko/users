@@ -1,0 +1,41 @@
+{% extends "index.html" %}
+
+{% block main %}
+    <div id='courses'>
+        <h3>CREATE USER</h3>
+    </div>
+    <div class="rules">
+    </div>
+    {% block table %}
+        <div class='user-form'>
+            <form action="{% url 'create'%}?next=/" method="post">
+                {% csrf_token %}
+                <div class="input-group">
+                </div>
+                <div class="input-group">
+                    {{ form.email }}
+                </div>
+                <div class="input-group">
+                    {{ form.password }}
+                </div>
+                <div class="input-group">
+                    {{ form.name }}
+                </div>
+                <div class="input-group">
+                    {{ form.phone }}
+                </div>
+                <div class="input-group">
+                    {{ form.mobile_phone }}
+                </div>
+                {% if form.errors %}
+                <div style="color: red;">{{ form.errors }}</div>
+                {% endif %}
+                <div>
+                    <input type="submit" value="Create" />
+                </div>
+            </form>
+        </div>
+    {% endblock table %}
+
+{% endblock %}
+

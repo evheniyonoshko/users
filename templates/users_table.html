@@ -1,0 +1,79 @@
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Status</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for user in object_list %}
+    <tr>
+      <td><strong>{{ user.name }}</strong></td>
+      <td>{{ user.email }}</td>
+      <td>{% if user.is_active %}
+            Active
+          {% else %}
+            Inactive
+          {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<div class="pagination w3-bar">
+    <span class="step-links">
+        {% if object_list.has_previous %}
+            <a class='circle w3-button w3-green' href="?q={{ query }}&{{ page_request_var }}={{ object_list.previous_page_number }}&take={{ take }}">
+                <i class="arrow left"></i>
+            </a>
+        {% else %}
+            <a class='circle w3-button w3-grey' href="?q={{ query }}&{{ page_request_var }}={{ object_list.number }}&take={{ take }}">
+                <i class="arrow left"></i>
+            </a>
+        {% endif %}
+
+        <span class="range">
+            {% if object_list.paginator.num_pages <= 5 %}
+                {% for page in object_list.paginator.page_range %}
+                    {% if page == object_list.number %}
+                        <a class='circle w3-button w3-hover-green w3-green' href="?q={{ query }}&{{ page_request_var }}={{ page }}&take={{ take }}">
+                            {{ page }}
+                        </a>
+                    {% else %}
+                        <a class='circle w3-button w3-hover-green' href="?q={{ query }}&{{ page_request_var }}={{ page }}&take={{ take }}">
+                            {{ page }}
+                        </a>
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                {% for page in object_list.paginator.page_range %}
+                    {% if page >= object_list.number|add:"-2" and page <= object_list.number|add:"2" %}
+                        {% if page == object_list.number %}
+                            <a class='circle w3-button w3-green' href="?q={{ query }}&{{ page_request_var }}={{ page }}&take={{ take }}">
+                                {{ page }}
+                            </a>
+                            
+                        {% else %}
+                            <a class='circle w3-button w3-hover-green' href="?q={{ query }}&{{ page_request_var }}={{ page }}&take={{ take }}">
+                                {{ page }}
+                            </a>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </span>
+
+        {% if object_list.has_next %}
+            <a class='circle w3-button w3-green' href="?q={{ query }}&{{ page_request_var }}={{ object_list.next_page_number }}&take={{ take }}">
+                <i class="arrow right"></i>
+            </a>
+        {% else %}
+            <a class='circle w3-button w3-grey' href="?q={{ query }}&{{ page_request_var }}={{ object_list.number }}&take={{ take }}">
+                <i class="arrow right"></i>
+            </a>
+        {% endif %}
+    </span>
+</div>

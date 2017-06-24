@@ -1,0 +1,35 @@
+{% extends "index.html" %}
+
+{% block main %}
+    <div class="rules">
+        {% block rules %}
+            <a href="{% url 'create'%}" class='add w3-button w3-circle w3-red'></a>
+            <div class="search">
+                <form action='/' method="GET">
+                    <input type="text" name='q' class="form-control w3-input w3-border" maxlength="64" placeholder="Search" />
+                    <button type="submit" class="btn btn-primary btn-sm w3-green"></button>
+                </form>
+            </div>
+            <div id='users'>
+                <h3>USERS</h3>
+            </div>
+            <div class='count'>
+                <div class="w3-dropdown-hover">
+                <button id='select-btn' class="w3-button">{{ take }} <i class="arrow bottom"></i></button>
+                <div class="w3-dropdown-content w3-bar-block w3-card-4">
+                    <a href="{{ url }}take=10" class="w3-bar-item w3-button">10</a>
+                    <a href="{{ url }}take=15" class="w3-bar-item w3-button">15</a>
+                    <a href="{{ url }}take=20" class="w3-bar-item w3-button">20</a>
+                </div>
+                </div>
+            </div>
+                
+        {% endblock rules %}
+    </div>
+    <div class="table">
+        {% block table %}
+            {% include "users_table.html" %}
+        {% endblock table %}
+        
+    </div>
+{% endblock %}

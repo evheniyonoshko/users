@@ -1,0 +1,13 @@
+{% extends "index.html" %}
+
+{% block main %}
+    <div id='courses'>
+        <h3>COURSES</h3>
+    </div>
+    <div class="rules">
+    </div>
+    {% block table %}
+        {% include "courses_table.html" %}
+    {% endblock table %}
+
+{% endblock %}

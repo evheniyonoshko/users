@@ -1,0 +1,196 @@
+html {
+    height: 100%;
+    box-sizing: border-box;
+}
+
+body{
+    color:#000000;
+    margin-left:0;
+    margin-right:0;
+    margin-top:0;
+    margin-bottom:0;
+    background-color: #E5E3E3 !important;
+    
+}
+main {
+    height: 100%;
+    display: flex;
+    max-width: 1100px;
+    margin-top: 55px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1rem;
+    background-color: #E5E3E3 !important;
+    display: block;
+    position: inherit;
+}
+
+div.name, a.menu-href {
+	font-family: "Covered By Your Grace";
+	font-size: 24px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 500;
+	line-height: 26.4px;
+    color: #fff;
+}
+
+a.menu-href{
+    text-decoration: none;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    margin-top: 5px;
+    margin-right: 50px;
+    display: inline;
+}
+
+.name{
+    top: 0px;
+    margin: 5px 0;
+    margin-left: 100px;
+    color: #fff;
+}
+
+.navbar{
+    top: 0px;
+    margin: 5px 0;
+    margin-left: 1000px;
+    margin-right: 50px;
+    position: absolute;
+}
+
+.rules{
+    height: 40px;
+    width: 100%;
+    max-width: 1100px;
+    background-color: #E5E3E3 !important;
+}
+
+
+.add {
+    background: url('/static/img/plus.png');
+    background-size: 35px 35px;
+    background-repeat: no-repeat;
+    background-position: center;
+    align-content: center;
+    position: absolute;
+	border-radius: 50%;
+    border: 1px;
+	width: 40px;
+	height: 40px;
+    font-size: 40px;
+    text-align: center;
+}
+
+.circle {
+    border-radius: 50%;
+    border: 1px solid #E5E3E3 !important;
+}
+
+.header{
+    max-width: 1360px;
+    height: 40px !important;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+#search {
+    float: right;
+    width: 250px;
+}
+
+.search {
+    width: 230px;
+    height: 30px;
+    position: relative;
+    left: 60px;
+    float: left;
+    line-height: 22px;
+}
+
+.search input {
+    text-indent: 25px;
+    position: absolute;
+    width: 0px;
+    float: right;
+    margin-left: 18px;
+    left: 20px
+    -webkit-transition: all 0.7s ease-in-out;
+    -moz-transition: all 0.7s ease-in-out;
+    -o-transition: all 0.7s ease-in-out;
+    transition: all 0.7s ease-in-out;
+    height: 39px;
+    line-height: 18px;
+    padding: 0 2px 0 2px;
+    border-radius:1px;
+    background: #dddddd;
+    border-bottom-right-radius: 2em;
+    border-top-right-radius: 2em;
+
+    
+}
+
+input:focus{
+    outline: none;
+}
+
+.search:hover input, .search input:focus{
+    width: 200px;
+}
+
+.btn {
+    background: url('/static/img/search.png');
+    background-size: 25px 25px;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 50%;
+    border: 1px;
+	width: 40px;
+	height: 40px;
+    position: absolute;
+    outline: none;
+}
+
+.count {
+    margin-left: 900px;
+    position: absolute;
+}
+
+#users, #courses{
+    color: black;
+    margin-left: 450px;
+    position: absolute;
+}
+
+#select-btn {
+    outline: none;
+    height: 40px;
+    width: 160px;
+    border-bottom-right-radius: 2em;
+    border-top-right-radius: 2em;
+    border-bottom-left-radius: 2em;
+    border-top-left-radius: 2em;
+}
+
+.w3-dropdown-hover {
+    border-bottom-right-radius: 2em;
+    border-top-right-radius: 2em;
+    border-bottom-left-radius: 2em;
+    border-top-left-radius: 2em;
+}
+
+
+.user-form {
+    width: 200px;
+    color: #fff;
+    height: 600px;
+
+}

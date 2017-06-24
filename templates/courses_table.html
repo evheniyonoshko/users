@@ -1,0 +1,16 @@
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Code</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for course in queryset_list %}
+      <tr>
+        <td><strong>{{ course.name }}</strong></td>
+        <td>{{ course.code }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
