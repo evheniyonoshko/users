@@ -2,8 +2,8 @@ from django.shortcuts import render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 
-from customers.models import User, Courses
-from customers.forms import SingUpForm
+from customers.models import User, Courses, Customers
+from customers.forms import CreateUserForm
 
 
 __author__ = 'Yevhenii Onoshko'
@@ -16,28 +16,30 @@ def courses_list(request):
 
 
 def create_user(request):
-    form = SingUpForm()
+    form = CreateUserForm()
     if request.method == 'POST':
-        form = SingUpForm(request.POST)
+        form = CreateUserForm(request.POST)
         if form.is_valid():
             print(form.changed_data)
             try:
-                user = User.objects.get(email=form.cleaned_data['email'])
+                user = Customers.objects.get(email=form.cleaned_data['email'])
                 raise ValueError('This email address already exists. Please try again')
             except:
-                confirmation_code = ''.join(random.choice(string.ascii_uppercase + string.digits + string.ascii_lowercase) for x in range(33))
-                user = User.objects.create_user(
-                    email=form.cleaned_data['email'],
-                    password=form.cleaned_data['password'],
+                user = Customers.objects.create(
                     name=form.cleaned_data['name'],
-                    phone=form.cleaned_data['phone'],
-                    mobile_phone=form.cleaned_data['mobile_phone'])
-                return render(request, 'users.html', {})
+                    email=form.cleaned_data['email'],
+                    phone=form.cleaned_data['phone'] or None,
+                    mobile_phone=form.cleaned_data['mobile_phone'] or None,
+                    status=True if form.cleaned_data['status'] == u'True' else False)
+                return render(request, 'create_user.html', context={'form': form,
+                                                                    'message': 'User created successfully'})
+        else:
+            return render(request, 'create_user.html', context={'form': form})
     return render(request, 'create_user.html', context={'form': form})
 
 
 def users_list(request):
-    queryset_list = User.objects.all()
+    queryset_list = Customers.objects.all()
     query = request.GET.get("q")
     try:
         take = request.GET.get("take")

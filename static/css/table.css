@@ -96,18 +96,23 @@ tbody:hover tr:hover td {
 }
 
 .pagination {
-	height: 40px;
-	width: 100px;
-	margin: auto;
-    left: 35%;
-    margin-right: -35%;
+	position: relative;
+	text-align: center;
+
+	height: 60px;
+	max-width: 400px;
+	margin-left: 35%;
 }
 
-i {
-    border: solid black;
+i.arrow, i.arrow-back{
+    border: solid #fff;
     border-width: 0 1px 1px 0;
     display: inline-block;
     padding: 4px;
+}
+
+i.required {
+    color: red;
 }
 
 

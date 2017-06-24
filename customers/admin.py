@@ -9,7 +9,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 
 from customers.forms import UserAdminForm
-from customers.models import User, Courses
+from customers.models import User, Courses, Customers
 
 
 class UserAdmin(BaseUserAdmin):
@@ -18,12 +18,12 @@ class UserAdmin(BaseUserAdmin):
     list_filter = ['is_active', ]
 
     list_display = (
-        'email', 'first_name', 'last_name', 'name', 'phone', 'mobile_phone', 'is_superuser', 'is_active', 'is_staff',
+        'username', 'email', 'first_name', 'last_name', 'is_superuser', 'is_active', 'is_staff',
     )
 
     fieldsets = (
         ('Info', {
-            'fields': ('email', 'first_name', 'last_name', 'name', 'phone', 'mobile_phone')
+            'fields': ('username', 'email', 'first_name', 'last_name')
         }),
         ('Permissions', {
             'fields': ('is_superuser','is_staff', 'is_active')
@@ -33,8 +33,8 @@ class UserAdmin(BaseUserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'password1', 'password2', 'name',
-                       'first_name', 'last_name', 'phone', 'mobile_phone')
+            'fields': ('email', 'password1', 'password2', 'username',
+                       'first_name', 'last_name')
         }),
         ('Permissions', {
             'fields': ('is_superuser', 'is_staff', 'is_active')
@@ -63,5 +63,14 @@ class CoursesAdmin(admin.ModelAdmin):
     search_fields = ('name', )
     fields = ('name', 'code',)
 
+
+class CustomersAdmin(admin.ModelAdmin):
+    list_per_page = 30
+    list_display = ('name', 'email', 'phone', 'mobile_phone', 'status')
+    search_fields = ('name',)
+    fields = ('name', 'email', 'phone', 'mobile_phone', 'status')
+
+
 admin.site.register(User, UserAdmin)
 admin.site.register(Courses, CoursesAdmin)
+admin.site.register(Customers, CustomersAdmin)

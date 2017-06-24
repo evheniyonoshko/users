@@ -90,8 +90,16 @@ li {
 }
 
 .circle {
+    max-width: 40px;
+    max-height: 40px;
     border-radius: 50%;
     border: 1px solid #E5E3E3 !important;
+}
+
+.pgn {
+    display: inline;
+    max-height: 60px !important;
+    max-width: 60px !important;
 }
 
 .header{
@@ -174,13 +182,9 @@ input:focus{
     outline: none;
     height: 40px;
     width: 160px;
-    border-bottom-right-radius: 2em;
-    border-top-right-radius: 2em;
-    border-bottom-left-radius: 2em;
-    border-top-left-radius: 2em;
 }
 
-.w3-dropdown-hover {
+input, select#id_status, .w3-dropdown-hover, #select-btn, .success{
     border-bottom-right-radius: 2em;
     border-top-right-radius: 2em;
     border-bottom-left-radius: 2em;
@@ -189,8 +193,71 @@ input:focus{
 
 
 .user-form {
-    width: 200px;
+    display: block;
+    margin: auto;
+    margin-top: 30px;
+    width: 100%;
     color: #fff;
     height: 600px;
+}
 
+form#user-form {
+    margin-left: 40%;
+    width: 55%;
+}
+
+input, select#id_status{
+    outline: none;
+    width: 250px;
+    height: 35px;
+    text-indent: 25px;
+}
+
+.input-group {
+    width: 500px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+form input[type="submit"] {
+    text-indent: 0px;
+    width: 100px;
+    align-items: center;
+    margin-top: 20px;
+    margin-left: 150px;
+    color: #fff !important;
+    background-color: green !important;
+}
+
+.success{
+    width: 250px;
+    height: 40px;
+    float: right;
+    font-size: 18px;
+    padding-top: 4px;
+    text-align: center;
+    border: 1px solid green !important;
+}
+
+
+i.error-message {
+    position: absolute;
+    margin-top: 5px;
+    margin-left: 5px;
+}
+
+
+
+.back {
+    position: absolute;
+	border-radius: 50%;
+    border: 1px;
+	width: 40px;
+	height: 40px;
+    font-size: 40px;
+    text-align: center;
+}
+
+.arrow-back {
+    margin-bottom: 28px;
 }

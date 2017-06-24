@@ -29,10 +29,8 @@ class UserManager(auth_models.BaseUserManager):
             user.save(using=self._db)
         else:
             user = self.model(
-                name=kwargs['name'] or None,
-                email=UserManager.normalize_email(email),
-                phone=kwargs['phone'] or None,
-                mobile_phone=kwargs['phone'] or None,
+                username=kwargs['username'] or None,
+                email=UserManager.normalize_email(email)
                 )
             user.save(using=self._db)
         user.set_password(password)
@@ -60,11 +58,9 @@ class User(auth_models.PermissionsMixin, auth_models.AbstractBaseUser):
     """
     registered = models.DateField(auto_now_add=True)
     email = models.EmailField(max_length=128, unique=True)
-    name = models.CharField('Name', max_length=128)
+    username = models.CharField('Username', max_length=128)
     first_name = models.CharField('First Name', max_length=128, blank=True, null=True)
     last_name = models.CharField('Last Name', max_length=128, blank=True, null=True)
-    phone = models.CharField('Phone', max_length=128, blank=True, null=True)
-    mobile_phone = models.CharField('Mobile Phone', max_length=128, blank=True, null=True)
     is_active = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
 
@@ -94,6 +90,14 @@ class User(auth_models.PermissionsMixin, auth_models.AbstractBaseUser):
 
     def has_module_perms(self, app_label):
         return True
+
+
+class Customers(models.Model):
+    name = models.CharField('Name', max_length=128)
+    email = models.EmailField('Email', max_length=128, unique=True)
+    phone = models.CharField('Phone', max_length=128, blank=True, null=True)
+    mobile_phone = models.CharField('Mobile Phone', max_length=128, blank=True, null=True)
+    status = models.BooleanField()
 
 
 class Courses(models.Model):

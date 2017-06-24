@@ -9,13 +9,16 @@
 <!--<![endif]-->
 
 <head>
-    <meta charset="utf-8">
-    <title>My site</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'css/table.css' %}" />
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Covered+By+Your+Grace" />
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    
+        <meta charset="utf-8">
+        <title>My site</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'css/table.css' %}" />
+        <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Covered+By+Your+Grace" />
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    {% block scripts %}
+    {% endblock %}
 </head>
 
 <body>
