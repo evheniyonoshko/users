@@ -1,9 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 
 from customers.models import User, Courses, Customers
-from customers.forms import CreateUserForm
+from customers.forms import CreateUserForm, ChangeUserForm, CreateCoursesForm
 
 
 __author__ = 'Yevhenii Onoshko'
@@ -15,12 +15,54 @@ def courses_list(request):
                                             'courses': True})
 
 
+def change_user(request, user_id):
+    user = Customers.objects.get(id=int(user_id))
+    form = ChangeUserForm(instance=user)
+    if request.method == 'POST':
+        form = ChangeUserForm(request.POST, instance=user)
+        if form.is_valid():
+            user.email = form.cleaned_data['email']
+            user.phone = form.cleaned_data['phone']
+            user.mobile_phone = form.cleaned_data['mobile_phone']
+            user.status = True if form.cleaned_data['status'] == u'True' else False
+            user.save()
+            return render(request, 'change_user.html', context={'form': form,
+                                                                'user_id': user_id,
+                                                                'message': 'User changed successfully'})
+
+    return render(request, 'change_user.html', context={'form': form,
+                                                        'user_id': user_id})
+
+def delete_user(request, user_id):
+    Customers.objects.get(id=int(user_id)).delete()
+    return redirect('/')
+
+
+
+def create_course(request):
+    queryset_list = Courses.objects.all()
+    form = CreateCoursesForm()
+    if request.method == 'POST':
+        form = CreateCoursesForm(request.POST)
+        if form.is_valid():
+            try:
+                course = Courses.objects.get(code=form.cleaned_data['code'])
+                raise ValueError('This course already exists. Please try again')
+            except:
+                course = Courses.objects.create(
+                    name=form.cleaned_data['name'],
+                    code=form.cleaned_data['code'])
+                return render(request, 'create_course.html', context={'form': form,
+                                                                      'message': 'Course created successfully'})
+    return render(request, "create_course.html", {'form': form,
+                                                  'courses': True})
+
+
 def create_user(request):
     form = CreateUserForm()
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
         if form.is_valid():
-            print(form.changed_data)
             try:
                 user = Customers.objects.get(email=form.cleaned_data['email'])
                 raise ValueError('This email address already exists. Please try again')

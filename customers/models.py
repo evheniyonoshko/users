@@ -91,6 +91,10 @@ class User(auth_models.PermissionsMixin, auth_models.AbstractBaseUser):
     def has_module_perms(self, app_label):
         return True
 
+class Courses(models.Model):
+    name = models.CharField('Name', max_length=128)
+    code = models.CharField('Code', max_length=128, unique=True)
+
 
 class Customers(models.Model):
     name = models.CharField('Name', max_length=128)
@@ -98,8 +102,4 @@ class Customers(models.Model):
     phone = models.CharField('Phone', max_length=128, blank=True, null=True)
     mobile_phone = models.CharField('Mobile Phone', max_length=128, blank=True, null=True)
     status = models.BooleanField()
-
-
-class Courses(models.Model):
-    name = models.CharField('Name', max_length=128)
-    code = models.CharField('Code', max_length=128)
+    courses = models.ManyToManyField(Courses, blank=True)

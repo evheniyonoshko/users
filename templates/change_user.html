@@ -1,4 +1,7 @@
 {% extends "index.html" %}
+{% load staticfiles %}
+{% load add_class %}
+
 {% block scripts %}
     <script type="text/javascript">
         $(function() {
@@ -6,6 +9,22 @@
                 window.location.href = "/";
             });
         });
+    </script>
+    <script type='text/javascript'>
+        function hide_show() {
+            var add_btn = document.getElementById('add_btn');
+            var label_course = document.getElementById('label_course');
+            var block = document.getElementById('id_courses');
+            if (block.style.display === 'none') {
+                block.style.display = 'inline-block';
+                label_course.style.display = 'inline-block'
+                add_btn.style.marginLeft = '25px';
+            } else {
+                block.style.display = 'none';
+                label_course.style.display = 'none'
+                add_btn.style.marginLeft = '205px';
+            }
+        }
     </script>
 {% endblock %}
 {% block main %}
@@ -29,14 +48,24 @@
     <div class="table">
         {% block table %}
             <div class='user-form'>
-                <form id='user-form' action="{% url 'create'%}?next=/" method="post" novalidate="novalidate">
+                <form id='user-form' action="{% url 'change' user_id %}?next=/" method="post" novalidate="novalidate">
                     {% csrf_token %}
                     {% for field in form %}
                         <div class="input-group">
-                            <i class='w3-text-black'>
-                                {{ field.label_tag }}
-                            </i> 
-                            <br> {{ field }}
+                            {% if field.label == 'Courses'%}
+                                <i id='label_course' class='w3-text-black'>
+                                    {{ field.label_tag }}
+                                </i>
+                                <br>
+                                {{ field }}
+                                <a id='add_btn' href="#" onclick="hide_show()" class='add addcourse w3-button w3-circle w3-green'></a>
+                            {% else %}
+                                <i class='w3-text-black'>
+                                    {{ field.label_tag }}
+                                </i>
+                                <br>
+                                {{ field }}
+                            {% endif %}
                             {% if form.errors %}
                                 {% for error in field.errors %}
                                 <i class="error-message w3-text-red">
@@ -50,7 +79,7 @@
                         </div>
                     {% endfor %}
                     <div class="input-group">
-                        <input type="submit" value="Create" />
+                        <input type="submit" value="Save" />
                     </div>
                 </form>
             </div>

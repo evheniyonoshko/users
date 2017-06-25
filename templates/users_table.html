@@ -19,7 +19,10 @@
           {% endif %}
       </td>
       <td>
-          
+        <div class='action'>
+            <a id='change' href="{% url 'change' user.id %}" class='change circle-small w3-button w3-green'></a>
+            <a id='delete' href="{% url 'delete_user' user.id %}" class='delete circle-small w3-button w3-red'></a>
+        </div>
       </td>
     </tr>
     {% endfor %}

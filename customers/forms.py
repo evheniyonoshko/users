@@ -56,3 +56,64 @@ class CreateUserForm(forms.ModelForm):
     class Meta:
         model = Customers
         fields = ('name', 'email', 'phone', 'mobile_phone', 'status')
+
+
+class CreateCoursesForm(forms.ModelForm):
+    class Meta:
+        model = Courses
+        fields = ('name', 'code')
+
+
+class ChangeUserForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(self.__class__, self).__init__(*args, **kwargs)
+        courses_choices = []
+        for courses in Courses.objects.all():
+            if courses.name:
+                courses_choices.append((courses.name, courses.name))
+        self.fields['courses'].choices = courses_choices
+
+    name = forms.CharField(
+        label='Name',
+        max_length=128,
+        widget=forms.TextInput(attrs={'placeholder': 'Name',
+                                      'class': 'w3-gray',
+                                      'readonly':'readonly'}),
+        required=True,
+    )
+
+    email = forms.EmailField(
+        label='E-Mail',
+        max_length=128,
+        widget=forms.TextInput(attrs={'placeholder': 'tinyperson@gmail.com'}),
+        required=True,
+    )
+
+    phone = forms.CharField(
+        label='Phone',
+        max_length=128,
+        widget=forms.TextInput(attrs={'placeholder': 'Phone'}),
+        required=False
+    )
+    mobile_phone = forms.CharField(
+        label='Mobile Phone',
+        max_length=128,
+        widget=forms.TextInput(attrs={'placeholder': 'Mobile Phone'}),
+        required=False
+    )
+
+    status = forms.ChoiceField(
+        label='Status',
+        choices = STATUS_CHOICES)
+
+    courses = forms.ChoiceField(
+        label='Courses',
+        required=False,
+        widget=forms.Select(attrs={'class':'select-btn',
+                                   'style': 'display:none;'})
+    )
+
+
+    class Meta:
+        model = Customers
+        fields = ('name', 'email', 'phone', 'mobile_phone', 'status', 'courses')

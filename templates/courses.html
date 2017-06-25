@@ -5,6 +5,9 @@
         <h3>COURSES</h3>
     </div>
     <div class="rules">
+        {% block rules %}
+            <a href="{% url 'create_course'%}" class='add w3-button w3-circle w3-red'></a>
+        {% endblock %}
     </div>
     {% block table %}
         {% include "courses_table.html" %}

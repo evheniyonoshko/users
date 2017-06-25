@@ -96,6 +96,38 @@ li {
     border: 1px solid #E5E3E3 !important;
 }
 
+.circle-small {
+    height: 30px;
+    width: 30px;
+    margin-left: 30px;
+    margin: auto;
+    border-radius: 50%;
+    border: 1px solid #E5E3E3 !important;
+}
+
+
+#change {
+	background: url('/static/img/change.png');
+    background-size: 40px 40px;
+    background-repeat: no-repeat;
+    background-position: center;
+    align-content: center;
+	border-radius: 50%;
+    border: 1px;
+    text-align: center;
+}
+
+#delete {
+	background: url('/static/img/delete.png');
+    background-size: 40px 40px;
+    background-repeat: no-repeat;
+    background-position: center;
+    align-content: center;
+	border-radius: 50%;
+    border: 1px;
+    text-align: center;
+}
+
 .pgn {
     display: inline;
     max-height: 60px !important;
@@ -184,7 +216,14 @@ input:focus{
     width: 160px;
 }
 
-input, select#id_status, .w3-dropdown-hover, #select-btn, .success{
+.select-btn {
+    outline: none;
+    width: 180px;
+    height: 35px;
+    text-indent: 25px;
+}
+
+input, select#id_status, .w3-dropdown-hover, #select-btn, .success, .select-btn{
     border-bottom-right-radius: 2em;
     border-top-right-radius: 2em;
     border-bottom-left-radius: 2em;
@@ -215,6 +254,7 @@ input, select#id_status{
 
 .input-group {
     width: 500px;
+    height: 60px !important;
     margin-top: 10px;
     margin-bottom: 10px;
 }
@@ -260,4 +300,16 @@ i.error-message {
 
 .arrow-back {
     margin-bottom: 28px;
+}
+
+.addcourse {
+    display: inline-block;
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    margin-left: 205px;
+}
+
+#label_course {
+    display: none;
 }
