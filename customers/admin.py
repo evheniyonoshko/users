@@ -68,7 +68,8 @@ class CustomersAdmin(admin.ModelAdmin):
     list_per_page = 30
     list_display = ('name', 'email', 'phone', 'mobile_phone', 'status')
     search_fields = ('name',)
-    fields = ('name', 'email', 'phone', 'mobile_phone', 'status')
+    fields = ('name', 'email', 'phone', 'mobile_phone', 'status', 'courses')
+
 
 
 admin.site.register(User, UserAdmin)

@@ -3,6 +3,7 @@
 {% load add_class %}
 
 {% block scripts %}
+    <script src="{% static 'js/script.js' %}"></script>
     <script type="text/javascript">
         $(function() {
             $("#msg").delay(3000).fadeOut(0, function(){
@@ -10,22 +11,33 @@
             });
         });
     </script>
-    <script type='text/javascript'>
-        function hide_show() {
-            var add_btn = document.getElementById('add_btn');
-            var label_course = document.getElementById('label_course');
-            var block = document.getElementById('id_courses');
-            if (block.style.display === 'none') {
-                block.style.display = 'inline-block';
-                label_course.style.display = 'inline-block'
-                add_btn.style.marginLeft = '25px';
-            } else {
-                block.style.display = 'none';
-                label_course.style.display = 'none'
-                add_btn.style.marginLeft = '205px';
-            }
-        }
+    <script>
+        $(function() {
+            $('#change-user').on('click', function(){
+                var user_data = {
+                    'courses': [document.getElementById('course-name-1').textContent,
+                                document.getElementById('course-name-2').textContent,
+                                document.getElementById('course-name-3').textContent,
+                                document.getElementById('course-name-4').textContent,
+                                document.getElementById('course-name-5').textContent,
+                    ],
+                    'csrfmiddlewaretoken': '{{ csrf_token }}',
+                };
+                $.ajax({
+                    type: 'POST',
+                    url: "{% url 'ajax_change' user_id %}",
+                    data: user_data,
+                    success: function() {
+                        console.log('success');
+                    },
+                    error: function(){
+                        alert('not succcess!!!')
+                    }
+                });
+            });
+        });
     </script>
+    
 {% endblock %}
 {% block main %}
     <div id='courses'>
@@ -39,7 +51,7 @@
                 </a>
             </span>
             {% if message %}
-                <div id='msg' class="success input-group">
+                <div id='msg' class="success">
                     <b><i class="w3-text-green">{{ message }}</i></b>
                 </div>
             {% endif %}
@@ -78,8 +90,17 @@
                             {% endif %}
                         </div>
                     {% endfor %}
+                    <div id="selected-items" class='selected-items'>
+                        {% for item in loop_times %}
+                            <div id='selected-item-{{item}}' style='display: none;' class='empty selected-items'>
+                                <b id='course-name-{{item}}' class='w3-text-black '></b>
+                                <a id='close' onclick="del(this)"></a>
+                                <hr class='style1 w3-text-gray'>
+                            </div>
+                        {% endfor %}
+                    </div>
                     <div class="input-group">
-                        <input type="submit" value="Save" />
+                        <input id='change-user' type="submit" value="Save" />
                     </div>
                 </form>
             </div>

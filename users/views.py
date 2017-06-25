@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
+import time
 
 from customers.models import User, Courses, Customers
 from customers.forms import CreateUserForm, ChangeUserForm, CreateCoursesForm
@@ -15,10 +16,24 @@ def courses_list(request):
                                             'courses': True})
 
 
+def ajax_change_user(request, user_id):
+    user = Customers.objects.get(id=int(user_id))
+    if request.method == 'POST':
+        courses = [item for item in request.POST.getlist('courses[]') if item]
+        print courses
+        for item in courses:
+            try:
+                user.courses.add(Courses.objects.get(name=item))
+            except:
+                raise ValueError('ERROR NOT SAVED!!!')
+    return redirect('/')
+
+
 def change_user(request, user_id):
     user = Customers.objects.get(id=int(user_id))
     form = ChangeUserForm(instance=user)
     if request.method == 'POST':
+        print request.POST
         form = ChangeUserForm(request.POST, instance=user)
         if form.is_valid():
             user.email = form.cleaned_data['email']
@@ -28,9 +43,11 @@ def change_user(request, user_id):
             user.save()
             return render(request, 'change_user.html', context={'form': form,
                                                                 'user_id': user_id,
+                                                                'loop_times': range(1,6),
                                                                 'message': 'User changed successfully'})
 
     return render(request, 'change_user.html', context={'form': form,
+                                                        'loop_times': range(1,6),
                                                         'user_id': user_id})
 
 def delete_user(request, user_id):

@@ -254,7 +254,7 @@ input, select#id_status{
 
 .input-group {
     width: 500px;
-    height: 60px !important;
+    min-height: 57.5px;
     margin-top: 10px;
     margin-bottom: 10px;
 }
@@ -312,4 +312,36 @@ i.error-message {
 
 #label_course {
     display: none;
+}
+
+.selected-items
+{
+    width: 240px !important;
+    margin-top: 30px;
+}
+
+.list-item {
+    margin-left: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+hr.style1 {
+    border-top: 1px solid #8c8b8b;
+    margin: 0 auto;
+}
+
+#close {
+    outline: none;
+    width: 20px;
+    height: 20px;
+    float: right;
+    background: url('/static/img/close.png');
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    background-position: center;
+    align-content: center;
+	border-radius: 50%;
+    border: 1px;
+    text-align: center;
 }

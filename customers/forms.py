@@ -67,7 +67,7 @@ class CreateCoursesForm(forms.ModelForm):
 class ChangeUserForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(self.__class__, self).__init__(*args, **kwargs)
-        courses_choices = []
+        courses_choices = [(None,'Select course...')]
         for courses in Courses.objects.all():
             if courses.name:
                 courses_choices.append((courses.name, courses.name))
@@ -112,7 +112,6 @@ class ChangeUserForm(forms.ModelForm):
         widget=forms.Select(attrs={'class':'select-btn',
                                    'style': 'display:none;'})
     )
-
 
     class Meta:
         model = Customers

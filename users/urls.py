@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'^$', views.users_list, name='users'),
     url(r'^courses/$', views.courses_list, name='courses'),
     url(r'^create_user/$', views.create_user, name='create'),
+    url(r'^ajax_change_user/(?P<user_id>\d+)/$', views.ajax_change_user, name='ajax_change'),
     url(r'^change_user/(?P<user_id>\d+)/$', views.change_user, name='change'),
     url(r'^create_course/$', views.create_course, name='create_course'),
     url(r'^delete_user/(?P<user_id>\d+)/$', views.delete_user, name='delete_user'),
